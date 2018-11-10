@@ -4,7 +4,6 @@ const prefix = '#'
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -30,7 +29,7 @@ client.on('ready', () => {
 client.login(process.env.BOT_TOKEN);
 //كود الحاله
 const devs = ["257804689268146177"];
-const adminprefix = [" type a prefix "];
+const adminprefix = ["#"];
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!developer.includes(message.author.id)) return;
