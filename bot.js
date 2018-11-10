@@ -27,9 +27,9 @@ client.on('ready', () => {
   console.log('')
 });
 (edited)
-const sss = [""] //توكن بوتك
-const adminprefix = "!";
-const devs = ['YOUR ID HERE'];
+const sss = ["NTEwOTI2MDg5NTU2NzIxNjY0.DsjcnA._t5bAem7LeNVRvtPZOUR5XCZECI"] //توكن بوتك
+const adminprefix = "#";
+const devs = ['257804689268146177'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
@@ -71,4 +71,4 @@ j = 1;
     
 });
 
-client.login(sss);
+client.login(NTEwOTI2MDg5NTU2NzIxNjY0.DsjcnA._t5bAem7LeNVRvtPZOUR5XCZECI);
