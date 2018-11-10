@@ -28,6 +28,33 @@ client.on('ready', () => {
   console.log('')
 });
 client.login(process.env.BOT_TOKEN);
+//كود الحاله
+client.on('message', async message => {
+            if(!message.channel.guild) return;
+             if (message.content.startsWith("1set")) {
+let args = message.content.split(' ').slice(1).join(' ');
+            let sigMessage = await args;
+            
+            if (sigMessage === "online") {
+                client.user.setStatus("online");
+                message.author.send("Your status was set to online.");
+            }
+            if (sigMessage === "idle") {
+                client.user.setStatus("idle");
+                message.author.send("Your status was set to idle.");
+            }
+            if (sigMessage === "invisible") {
+                client.user.setStatus("invisible");
+                message.author.send("Your status was set to invisible.");
+            }
+            if (sigMessage === "dnd") {
+                client.user.setStatus("dnd");
+                message.author.send("Your status was set to dnd.");
+            }
+            // message.author.send("." + message.content);
+        
+}
+});
 
 
 
@@ -67,10 +94,6 @@ client.on('message', message => {
    });
 
 
-//كود يعلمك كم بوت في السيرفر
-client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
-
-
 
 //كود اي احد يرسل لي البوت يقولي
 client.on('message', function(message) {
@@ -89,23 +112,6 @@ client.on('message', function(message) {
 
 
 
-//كود يدخل البوت في روم صوتي
-client.on('message', msg => {
-
-    if (msg.content == '$join') {
-        if (msg.member.voiceChannel) {
-
-     if (msg.member.voiceChannel.joinable) {
-         msg.member.voiceChannel.join().then(msg.react('✅'));
-     }
-    }
-}
-})
-client.on('ready', () => { //code bot not leave room voice //Bot Is Online
-    client.channels.get("ايدي الروم").join(); //by : iBeAnthonyD
-    });
-
-
 //كودي يوريك سكنك في ماين كرافت
 client.on("message", message => {
     var prefix = "#"
@@ -119,4 +125,8 @@ client.on("message", message => {
     message.channel.send(image)
         }
     });
+
+
+//كود يعلمك كم بوت في السيرفر
+client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
 
