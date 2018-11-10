@@ -29,8 +29,6 @@ client.on('ready', () => {
 });
 client.login(process.env.BOT_TOKEN);
 
-
-
 //كود اعطاء رتبه اول ما يدخل
 client.on ("guildMemberAdd", member => {
   
@@ -44,3 +42,6 @@ client.on ("guildMemberAdd", member => {
 
 
 
+
+//كود يعلمك كم بوت في السيرفر
+client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
