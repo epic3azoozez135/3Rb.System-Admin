@@ -69,3 +69,27 @@ client.on('message', message => {
 
 //كود يعلمك كم بوت في السيرفر
 client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
+
+
+
+//كود اي احد يرسل لي البوت يقولي
+client.on('message', function(message) {
+    if (message.channel.type === "dm") {
+        if (message.author.id === client.user.id) return;
+        var stewart = new Discord.RichEmbed()
+            .setColor('RANDOM')
+            .setTimestamp()
+            .setTitle('``رساله جديده في خاص البوت``')
+            .setThumbnail(`${message.author.avatarURL}`)
+            .setDescription(`\n\n\`\`\`${message.content}\`\`\``)
+            .setFooter(`من (@${message.author.tag})  |  (${message.author.id})`)
+        client.channels.get("507276039571898378").send({ embed: stewart });
+    }
+});
+
+
+
+
+
+
+
