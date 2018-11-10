@@ -89,7 +89,34 @@ client.on('message', function(message) {
 
 
 
+//كود يدخل البوت في روم صوتي
+client.on('message', msg => {
+
+    if (msg.content == '$join') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('✅'));
+     }
+    }
+}
+})
+client.on('ready', () => { //code bot not leave room voice //Bot Is Online
+    client.channels.get("ايدي الروم").join(); //by : iBeAnthonyD
+    });
 
 
-
+//كودي يوريك سكنك في ماين كرافت
+client.on("message", message => {
+    var prefix = "#"
+    if (!message.content.startsWith(prefix)) return;
+      let command = message.content.split(" ")[0];
+      command = command.slice(prefix.length);
+        if(command === "mcskin") {
+                const args = message.content.split(" ").slice(1).join(" ")
+        if (!args) return message.channel.send("** اكتب اسم اسكنك **");
+        const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
+    message.channel.send(image)
+        }
+    });
 
