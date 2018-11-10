@@ -1,35 +1,13 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '#'
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  console.log('')
-  console.log('')
-  console.log('╔[═════════════════════════════════════════════════════════════════]╗')
-  console.log(`[Start] ${new Date()}`);
-  console.log('╚[═════════════════════════════════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════════════════════════════]╗');
-  console.log(`Logged in as * [ " ${client.user.username} " ]`);
-  console.log('')
-  console.log('Informations :')
-  console.log('')
-  console.log(`servers! [ " ${client.guilds.size} " ]`);
-  console.log(`Users! [ " ${client.users.size} " ]`);
-  console.log(`channels! [ " ${client.channels.size} " ]`);
-  console.log('╚[════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════]╗')
-  console.log(' Bot Is Online')
-  console.log('╚[════════════]╝')
-  console.log('')
-  console.log('')
 });
-(edited)
-const sss = ["NTEwOTI2MDg5NTU2NzIxNjY0.DsjcnA._t5bAem7LeNVRvtPZOUR5XCZECI"] //توكن بوتك
-const adminprefix = "#";
-const devs = ['257804689268146177'];
+
+client.login(process.env.BOT_TOKEN);
+const adminprefix = "!";
+const devs = ['YOUR ID HERE'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
@@ -71,4 +49,4 @@ j = 1;
     
 });
 
-client.login(NTEwOTI2MDg5NTU2NzIxNjY0.DsjcnA._t5bAem7LeNVRvtPZOUR5XCZECI);
+client.login(process.env.BOT_TOKEN);
