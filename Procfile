@@ -1,3 +1,9 @@
-ahalm: node (name file bot)
-xd: node (name file bot)
-anyname: node (name file bot)
+kida: node bot.js
+kida: node bot2.js
+kida: node bot3.js
+kida: node bot4.js
+kida: node bot5.js
+kida: node bot6.js
+kida: node bot7.js
+kida: node bot8.js
+kida: node bot9.js
