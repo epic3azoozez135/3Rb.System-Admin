@@ -1,4 +1,4 @@
-zMishaery1: node (name file bot)
+zMishaery: node (name file bot)
 zMishaery2: node (name file bot)
 zMishaery3: node (name file bot)
 zMishaery4: node (name file bot)
