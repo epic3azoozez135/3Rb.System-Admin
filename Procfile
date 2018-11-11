@@ -1,9 +1,10 @@
-kida: node bot.js
-kida: node bot2.js
-kida: node bot3.js
-kida: node bot4.js
-kida: node bot5.js
-kida: node bot6.js
-kida: node bot7.js
-kida: node bot8.js
-kida: node bot9.js
+zMishaery1: node (name file bot)
+zMishaery2: node (name file bot)
+zMishaery3: node (name file bot)
+zMishaery4: node (name file bot)
+zMishaery5: node (name file bot)
+zMishaery6: node (name file bot)
+zMishaery7: node (name file bot)
+zMishaery8: node (name file bot)
+zMishaery9: node (name file bot)
+zMishaery10: node (name file bot)
