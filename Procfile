@@ -1,1 +1,1 @@
-worker: node bot.js
+kida: node bot.js
