@@ -28,35 +28,6 @@ client.on('ready', () => {
   console.log('')
 });
 client.login(process.env.BOT_TOKEN);
-//كود الحاله
-client.on('message', async message => {
-            if(!message.channel.guild) return;
-             if (message.content.startsWith("1set")) {
-let args = message.content.split(' ').slice(1).join(' ');
-            let sigMessage = await args;
-            
-            if (sigMessage === "online") {
-                client.user.setStatus("online");
-                message.author.send("Your status was set to online.");
-            }
-            if (sigMessage === "idle") {
-                client.user.setStatus("idle");
-                message.author.send("Your status was set to idle.");
-            }
-            if (sigMessage === "invisible") {
-                client.user.setStatus("invisible");
-                message.author.send("Your status was set to invisible.");
-            }
-            if (sigMessage === "dnd") {
-                client.user.setStatus("dnd");
-                message.author.send("Your status was set to dnd.");
-            }
-            // message.author.send("." + message.content);
-        
-}
-});
-
-
 
 //كود اعطاء رتبه اول ما يدخل
 client.on ("guildMemberAdd", member => {
@@ -65,50 +36,6 @@ client.on ("guildMemberAdd", member => {
    member.addRole (role);
   
 })
-
-
-
-//كود اذا احد نشر ياخذ كيك فوري
-client.on('message', message => {
-    if (message.content.includes('disc ord.gg')){      //شيل المسافه
-                        if(!message.channel.guild) return message.reply ('')
-                    if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
-       message.channel.send('kick <@' + message.author.id + '>')
-       message.delete() 
-       }
-    }
-          if (message.content.startsWith("kick ")) {
-             if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
-             var member= message.mentions.members.first();
-             member.ban().then((member) => {
-                 message.channel.sendMessage("", {embed: {
-                 author: {
-                 },
-                 title: 'بسبب النشر ' + member.displayName + ' تم طرد',
-                 color: 490101,
-                 }
-               });
-           }
-         ) 
-       }
-   });
-
-
-
-//كودي يوريك سكنك في ماين كرافت
-client.on("message", message => {
-    var prefix = "#"
-    if (!message.content.startsWith(prefix)) return;
-      let command = message.content.split(" ")[0];
-      command = command.slice(prefix.length);
-        if(command === "mcskin") {
-                const args = message.content.split(" ").slice(1).join(" ")
-        if (!args) return message.channel.send("** اكتب اسم اسكنك **");
-        const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
-    message.channel.send(image)
-        }
-    });
-
 
 //كود يعلمك كم بوت في السيرفر
 client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
