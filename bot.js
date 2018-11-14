@@ -51,21 +51,28 @@ client.on('guildMemberAdd', member => {
 
 //كود الافتار
 client.on('message', message => {
-    if (message.content.startsWith("!!avatar")) {
-if(!message.channel.guild) return;
+    if (message.content.startsWith("?avatar")) {
+        if (message.author.bot) return
         var mentionned = message.mentions.users.first();
-    var client;
+    var omar;
       if(mentionned){
-          var client = mentionned; } else {
-          var client = message.author;
+          var omar = mentionned;
+      } else {
+          var omar = message.author;
+         
       }
         const embed = new Discord.RichEmbed()
-                           .addField('by:', "<@" + message.author.id + ">")
-        .setColor(000000)
-        .setImage(`${client.avatarURL}`)
+        .setColor("RANDOM")
+        .setAuthor('Avatar Link :')
+        .setTitle('Click Here')
+        .setURL(`${omar.avatarURL}`)
+        .setImage(`${omar.avatarURL}`)
+        .setFooter('BayBot',client.user.avatarURL)
       message.channel.sendEmbed(embed);
     }
 });
+
+
 
 //كود البنق
 client.on('message' , message => {
@@ -77,6 +84,11 @@ client.on('message' , message => {
  })
   }  
  });
+
+
+
+
+
 
 
 
