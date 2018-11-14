@@ -378,6 +378,13 @@ client.on('message' , message => {
 
 
 
+//كود تغير الرنبو كل ثانيه
+client.on("ready", () => { // حقوق سيرفر اوميجا كودز
+  function lol() {
+    client.guilds.get('ايدي السيرفر').roles.find("name", ".").setColor("RANDOM");
+  };
+  setInterval(lol, 1000);
+});
 
 
 
