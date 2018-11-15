@@ -265,7 +265,7 @@ msg.delete();
 //كود معلومات السيرفر
 client.on('message', function(msg) {
     const prefix = '#'
-    if(msg.content.startsWith (prefix  + 'server')) {
+    if(msg.content.startsWith (prefix  + '. . .')) {
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
@@ -287,7 +287,7 @@ client.on('message', function(msg) {
 client.on('message', message => {
   var prefix = "#"
 var args = message.content.split(" ").slice(1);    
-if(message.content.startsWith(prefix + 'id')) {
+if(message.content.startsWith(prefix + '. . . .')) {
 var year = message.author.createdAt.getFullYear()
 var month = message.author.createdAt.getMonth()
 var day = message.author.createdAt.getDate()
