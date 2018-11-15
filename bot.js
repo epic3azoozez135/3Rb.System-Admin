@@ -106,7 +106,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
 
 //كود رابط
 client.on('message', message => {
-    if (message.content.startsWith("رابط")) {
+    if (message.content.startsWith("ز ز ز ز")) {
  
   message.channel.createInvite({
         thing: true,
