@@ -95,24 +95,97 @@ client.on('message', message => {
 
 
 
-client.on('message', message => { 
-    var prefix = "#";
-    if (message.author.boss) return;
-    if (!message.content.startsWith(prefix)) return;
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-    if (command == "Roleadd") {
-    if (!message.channel.guild) return;
-    if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return message.reply("**🚫انت لا تملك صلاحيات **").then(msg => msg.delete(5000));;
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
-    let user = message.mentions.users.first();
-    if (message.mentions.users.size < 1) return message.reply('**ضع منشن الشخص!!**').then(msg => {msg.delete(5000)});
-    let MRole = message.content.split(" ").slice(2).join(" ");
-    if(!MRole)return message.reply("يجب عليك وضع اسم الرتبة").then(msg => {msg.delete(5000)});
-    message.guild.member(user).addRole(message.guild.roles.find("name", MRole));
-    message.reply('*** Done ✅  ***').then(msg => {msg.delete(10000)});
+//كود ملومات السيرفر
+client.on('message', async function (message)  {
+if(message.content.startsWith(prefix+"server")) {
+const vlevel = ['None', 'Low (Must have verified email)', 'Medium (Must be register for 5 mineuts)', 'High (Need to wait 10 minutes)', 'Very High (Need verified phone on account)']
+const members = await message.guild.members.filter(m=> m.presence.status === 'online').size + message.guild.members.filter(m=> m.presence.status === 'idle').size + message.guild.members.filter(m=> m.presence.status === 'dnd').size  
+message.channel.send(new discord.RichEmbed() 
+.setAuthor(`${message.guild.name} [Server Icon URL]`, message.guild.iconURL)
+.setURL(message.guild.iconURL)
+.addField('🆔 ايدي السيرفر', message.guild.id, true)
+.addField('👑 اونر السيرفر', message.guild.owner, true)
+.addField('🗺 منطقة', message.guild.region, true)
+.addField(`👥 الاعضاء [${message.guild.memberCount}]`, `${members} online` ,true)
+.addField(`💬 القنوات`, `**${message.guild.channels.filter(c => c.type === 'category').size}** الاقسام | **${message.guild.channels.filter(c=> c.type === 'text').size}**روم كتابي | **${message.guild.channels.filter(c=> c.type === 'voice').size}** روم صوتي` ,true)
+.addField(`💠 مستوى التحقق`, vlevel[message.guild.verificationLevel] ,true)
+.addField(`👔 الرتب`, message.guild.roles.size ,true)
+.addField(`📆 تم انشأوها`, message.guild.createdAt ,true)
+)
+}
+})
+
+
+
+//كود id
+	var moment = require("moment");
+client.on('message', message => {
+if(message.author.bot) return;
+  var prefix = '#'; // البريفكس
+  
+  if (message.content.startsWith(prefix + "id")) { // الامر
+      message.react("🆔") 
+  if(!message.channel.guild) return message.reply(`**__بس بالسيرفرات__**`);
+   message.guild.fetchInvites().then(invs => {
+      let member = client.guilds.get(message.guild.id).members.get(message.author.id);
+      let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
+      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+      var moment = require('moment');
+      var args = message.content.split(" ").slice(1);
+let user = message.mentions.users.first();
+var men = message.mentions.users.first();
+ var heg;
+ if(men) {
+     heg = men
+ } else {
+     heg = message.author
+ }
+var mentionned = message.mentions.members.first();
+  var h;
+ if(mentionned) {
+     h = mentionned
+ } else {
+     h = message.member
+ }
+moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+    .setColor("!0a0909")
+    .setAuthor(message.author.username, message.author.avatarURL) 
+.addField('**تاريخ دخولك الدسكورد**:', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
+.addField('**تاريخ دخولك السيرفر**:', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
+.addField("**اسمك**", `${message.author.username}`)
+.addField('**تاقك**', message.author.discriminator)
+.addField('**ايديك**', message.author.id)
+.setFooter("『معلوماتك』")  
+    message.channel.sendEmbed(id);
+})
+}       
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+client.on('message', msg => {
+
+    if (msg.content == '#join') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
+     }
     }
-    });
+}
+});
 
 
 
@@ -135,3 +208,282 @@ client.on('message', message => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === 'سلام عليكم ') {
+msg.reply('**وعليكمم السلام**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === 'هلا') {
+msg.reply('**هلاااا**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === ' . ') {
+msg.reply('**. . .**');
+}
+});
