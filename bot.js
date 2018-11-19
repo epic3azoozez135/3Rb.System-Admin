@@ -95,8 +95,17 @@ client.on('message', message => {
 
 
 
-
-
+//كود يجبلك عدد واسامي. السيرفرات الي موجود فيها بوتك مع ذكر عدد الاشخاص الي في السيرفر 
+client.on('message', message => {
+       if (message.content.startsWith(prefix + '-server')) {
+     let msg =  client.guilds.map(guild => `**${guild.name}** عدد الاعضاء: ${guild.memberCount}`).join('\n');
+  let embed = new Discord.RichEmbed()
+  .setTitle(`${client.guilds.size}سيرفرات `)
+  .setDescription(`${msg}`)
+  .setColor("#00ff47");
+  message.channel.send(embed);
+}
+});
 
 
 
