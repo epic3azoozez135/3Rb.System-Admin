@@ -6,7 +6,7 @@ const prefix = "#";
  
 const devs = ["257804689268146177"]
  
-const adminprefix = "#";
+const adminprefix = "Gs-";
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!devs.includes(message.author.id)) return;
