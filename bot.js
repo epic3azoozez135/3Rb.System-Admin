@@ -296,7 +296,14 @@ client.on('message', msg => {
 
 //كود الرد
 client.on('message', msg => {
-if(msg.content === 'سلام عليكم ') {
+if(msg.content === 'السلام عليكم') {
+msg.reply('**وعليكمم السلام**');
+}
+});
+
+//كود الرد
+client.on('message', msg => {
+if(msg.content === 'سلام عليكم') {
 msg.reply('**وعليكمم السلام**');
 }
 });
@@ -310,29 +317,22 @@ msg.reply('**هلاااا**');
 
 //كود الرد
 client.on('message', msg => {
-if(msg.content === ' . ') {
-msg.reply('**. . .**');
+if(msg.content === 'هلاا') {
+msg.reply('**هلاااا**');
 }
 });
 
 //كود الرد
 client.on('message', msg => {
-if(msg.content === ' . ') {
-msg.reply('**. . .**');
+if(msg.content === '.') {
+msg.reply('**تفضل**');
 }
 });
 
 //كود الرد
 client.on('message', msg => {
-if(msg.content === ' . ') {
-msg.reply('**. . .**');
-}
-});
-
-//كود الرد
-client.on('message', msg => {
-if(msg.content === ' . ') {
-msg.reply('**. . .**');
+if(msg.content === '..') {
+msg.reply('**..**');
 }
 });
 
