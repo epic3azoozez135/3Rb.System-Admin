@@ -108,21 +108,7 @@ client.on('message', message => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//كود يدخل البوت الروم
 client.on('message', msg => {
 
     if (msg.content == '#join') {
