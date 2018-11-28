@@ -75,408 +75,194 @@ client.on('message', message => { if(!message.channel.guild) return; if(message.
 
 
 
+////////////////////////////////////////////////////////////////////////////
 
+//كود الباند
+var prefix = "#"
+client.on('message', message => {
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+ 
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+ 
+  let args = message.content.split(" ").slice(1);
+ 
+  if (command == "ban") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  /*let b5bzlog = client.channels.find("name", "5bz-log");
+ 
+  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+  if (message.mentions.users.size < 1) return message.reply("**:couple: , مـنـشـن شـخـص**");
+  if(!reason) return message.reply ("**:name_badge:  , اكـتـب سـبـب الـبـانـد**");
+  if (!message.guild.member(user)
+  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+ 
+  message.guild.member(user).ban(7, user);
+ 
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(`BANNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : banembed
+  })
+}
+});
 
+//كود فك الباند عن الكل
+client.on('message', message => {
+  if (message.content.startWith(prefix + "unban-all")){
+if(!message.channel.guild) return;
+message.guild.members.forEach( member => {
+   
+   member.unban()
+})
+}
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////
 
 
 
 ////////////////////////////////////////////////////////////////////////////
 
-//قسم اكواد السبه كامله اكثر من 300 سبه
+//كود الكيك
+client.on('message', message => {
+  const prefix = "#";
+    if (message.author.kick) return;
+    if (!message.content.startsWith(prefix)) return;
+   
+    let command = message.content.split(" ")[0];
+    command = command.slice(prefix.length);
+   
+    let args = message.content.split(" ").slice(1);
+   
+    if (command == "kick") {
+                 if(!message.channel.guild) return;
+           
+    if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
+    if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
+    let user = message.mentions.users.first();
+    let reason = message.content.split(" ").slice(2).join(" ");
+   
+    if (message.mentions.users.size < 1) return message.reply("**:couple: , مـنـشـن شـخـص**");
+    if(!reason) return message.reply ("**:name_badge:  , اكـتـب سـبـب الـطـرد**");
+    if (!message.guild.member(user)
+    .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+   
+    message.guild.member(user).kick(7, user);
+   
+    const banembed = new Discord.RichEmbed()
+    .setAuthor('Kicked !', user.displayAvatarURL)
+    .setColor("RANDOM")
+    .setTimestamp()
+    .addField("User:",  `[ + ${user.tag} + ]`)
+    .addField("By:", `[  + ${message.author.tag} +  ]`)
+    .addField("Reason:", `[ + ${reason} +  ]`)
+    client.channels.get("492583022982463500").send({embed : banembed})
+  }
+  });
 
 ////////////////////////////////////////////////////////////////////////////
 
 
+
 ////////////////////////////////////////////////////////////////////////////
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
+
+//كود مسح الشات ( الكلير ) نفس سبيد بوت
+client.on('message', message => {
+  var prefix = "#";
+ if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'clear')) {
+if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+let request = `Requested By ${message.author.username}`;
+message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+msg.react('✅')
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
+
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+var msg;
+      msg = parseInt();
+
+    message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+    message.channel.sendMessage("", {embed: {
+      title: "`` Chat Deleted ``",
+      color: 0x06DF00,
+      footer: {
+
+      }
+    }}).then(msg => {msg.delete(3000)});
+
+})
+reaction2.on("collect", r => {
+message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
 msg.delete();
-    
-    })
-  }
+})
+})
+}
 });
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
+
+//كود مسح الشات ( الكلير ) نفس سبيد بوت
+client.on('message', message => {
+  var prefix = "#";
+ if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'مسح')) {
+if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+let request = `Requested By ${message.author.username}`;
+message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+msg.react('✅')
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
+
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+var msg;
+      msg = parseInt();
+
+    message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+    message.channel.sendMessage("", {embed: {
+      title: "`` Chat Deleted ``",
+      color: 0x06DF00,
+      footer: {
+
+      }
+    }}).then(msg => {msg.delete(3000)});
+
+})
+reaction2.on("collect", r => {
+message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
 msg.delete();
-    
-    })
-  }
+})
+})
+}
 });
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'الطيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'انت طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'أنت طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'انت طويز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'أنت طويز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك محنه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك محنة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'انت طيزك محنه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'انت طيزك محنة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'أنت طيزك محنة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'أنت طيزك محنه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'في طيزك شي') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'في طيزك محنه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'في طيزك محنة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'زرقه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'زرقة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'في طيزك الحلو') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'في طيزك الحلوه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'في طيزك الحلوة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس ام طيزك الجذابه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس ام طيزك الجذابة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس أم طيزك الجذابه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس أم طيزك الجذابة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس أم طيزك الجذأبة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس أم طيزك الجذأبه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس ام طيزك الجذابة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'كس ام طيزك الجذابه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'معاك طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'معك طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك كبرانه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك كبرأنه') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك كبرانة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'طيزك كبرأنة') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'يا ابو طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'يا أبو طيز') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
+
+////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -487,36 +273,6 @@ msg.delete();
 
 
 
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'زبك') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'زب') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
-//كود السبه المنشن
-client.on ('message', msg => {
-  if (msg.content ===  'الزب') { 
-    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
-msgS.delete(1600);
-msg.delete();
-    
-    })
-  }
-});
 
 
 
