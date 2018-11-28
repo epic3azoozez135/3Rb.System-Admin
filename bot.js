@@ -2246,7 +2246,16 @@ msg.delete();
     })
   }
 });
-
+//كود السبه المنشن
+client.on ('message', msg => {
+  if (msg.content ===  '.') { 
+    msg.reply('**:unamused:ممنوع السب يا خوي**').them(msgS => {
+msgS.delete(1600);
+msg.delete();
+    
+    })
+  }
+});
 
 
 
