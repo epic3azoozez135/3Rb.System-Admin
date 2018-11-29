@@ -65,18 +65,6 @@ client.login(process.env.BOT_TOKEN);
 
 
 
-
-////////////////////////////////////////////////////////////////////////////
-//كود يعلك كم بوت في سيرفرك
-client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
-
-//كود يعلمك كم بوت في سيرفر
-client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'البوتات')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
-
-////////////////////////////////////////////////////////////////////////////
-
-
-
 ////////////////////////////////////////////////////////////////////////////
 
 //كود الباند
@@ -246,7 +234,7 @@ msg.delete();
 
 //كود فتح وتقفيل الشات
 client.on('message', message => {
-var prefix = "$";
+var prefix = "#";
        if(message.content === prefix + "cl") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
 
@@ -258,7 +246,7 @@ var prefix = "$";
                   message.reply("**__تـم الأن أقـفـال الـشـات مـؤقـت__ :white_check_mark:**")
               });
                 }
-//FIRE BOT
+
     if(message.content === prefix + "op") {
                         if(!message.channel.guild) return message.reply('** This command only for servers**');
 
@@ -282,7 +270,7 @@ var prefix = "$";
 //كود الحذف الروم او الشات
 client.on("message", (message) => { // Last Code
     if (message.content.startsWith('#del')) { // الامر والبريفكس
-        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions "); // Last Code
+        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions "); 
  
         let args = message.content.split(' ').slice(1); // Last Code
         let channel = message.client.channels.find('name', args.join(' ')); // Last Code
@@ -299,7 +287,7 @@ client.on("message", (message) => { // Last Code
 
 //كود لانشاء روم صوتي
   client.on('message', message => {
-    if (message.content.startsWith(prefix+"voice Room")) {
+    if (message.content.startsWith(prefix+"voice-Room")) {
         var args = message.content.split(" ").slice(1);
         var argrst = args.join(' ');
                     message.guild.createChannel(`${argrst}`,'voice')
@@ -836,24 +824,18 @@ client.on('message', message => {
 ////////////////////////////////////////////////////////////////////////////
 
 //كود البوت يكتب بدال عنك
-client.on('message', async msg => {
-  client.snek = require('snekfetch');
-var p = "#"
-if(msg.content.startsWith(p + "iktb")) {
-let args = msg.content.split(' ').slice(1).join(' ');
-if(!args) return args.missing(msg, 'لم يتم اضافة اي كلام', this.help);
-msg.channel.startTyping();
-const searchMessage = await msg.channel.send('Painting...');
-const { body } = await client.snek.get(`https://nekobot.xyz/api/imagegen?type=clyde&text=${encodeURIComponent(args)}`);
-msg.channel.send({file: { attachment:body.message, name: 'clyde.png'}}).then(()=> { searchMessage.delete(); msg.channel.stopTyping(); });
-};
-});
+
 
 ////////////////////////////////////////////////////////////////////////////
 
 
 
+////////////////////////////////////////////////////////////////////////////
 
+//كود يعلك كم بوت في سيرفرك
+client.on('message', message => { if(!message.channel.guild) return; if(message.content.startsWith(prefix + 'allbots')) { if (message.author.bot) return; let i = 1; const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`); const embed = new Discord.RichEmbed() .setDescription(`**${message.guild.members.filter(m=>m.user.bot).size} Bots In ${message.guild.name}** ${botssize.join('\n')}`) .setFooter(client.user.username, client.user.avatarURL) .setTimestamp(); message.channel.send(embed) } })
+
+////////////////////////////////////////////////////////////////////////////
 
 
 
