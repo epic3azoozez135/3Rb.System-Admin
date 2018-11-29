@@ -122,7 +122,7 @@ client.on('message', message => {
 
 //كود فك الباند عن الكل
 client.on('message', message => {
-  if (message.content.startWith(prefix + "unban-all")){
+  if(msg.content.startsWith (prefix  + '#uban-all')) {
 if(!message.channel.guild) return;
 message.guild.members.forEach( member => {
    
