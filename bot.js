@@ -108,12 +108,12 @@ client.on('message', message => {
   message.guild.member(user).ban(7, user);
  
   const banembed = new Discord.RichEmbed()
-  .setAuthor(`BANNED!`, user.displayAvatarURL)
+  .setAuthor(`تـم إعطـآئـه بـآند.`, user.displayAvatarURL)
   .setColor("RANDOM")
   .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  .addField("**أسـم الـذي تـم تـبـنـيـده:**",  '**{ ' + `${user.tag}` + ' }**')
+  .addField("**أسـم الـذي بـنـده:**", '**{ ' + `${message.author.tag}` + ' }**')
+  .addField("**سـبـب الـبـانـده :**", '**{ ' + `${reason}` + ' }**')
   message.channel.send({
     embed : banembed
   })
