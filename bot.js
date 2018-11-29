@@ -131,6 +131,31 @@ message.guild.members.forEach( member => {
 }
 });
 
+//كود اي احد ينشر يتبند
+client.on('message', message => {
+  if (message.content.includes('discord.gg')){
+                      if(!message.channel.guild) return message.reply ('')
+                  if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
+     message.channel.send('ban <@' + message.author.id + '>')
+     message.delete()
+     }
+  }
+        if (message.content.startsWith("ban")) {
+           if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
+           var member= message.mentions.members.first();
+           member.ban().then((member) => {
+               message.channel.sendMessage("", {embed: {
+               author: {
+               },
+               title: 'بسبب النشر ' + member.displayName + ' تم حظر',
+               color: 490101,
+               }
+             });
+         }
+       )
+     }
+ });
+
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -1348,60 +1373,7 @@ message.channel.sendEmbed(sh);
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود اي احد ينشر يتبند
-client.on('message', message => {
-  if (message.content.includes('discord.gg')){
-                      if(!message.channel.guild) return message.reply ('')
-                  if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
-     message.channel.send('ban <@' + message.author.id + '>')
-     message.delete()
-     }
-  }
-        if (message.content.startsWith("ban")) {
-           if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
-           var member= message.mentions.members.first();
-           member.ban().then((member) => {
-               message.channel.sendMessage("", {embed: {
-               author: {
-               },
-               title: 'بسبب النشر ' + member.displayName + ' تم حظر',
-               color: 490101,
-               }
-             });
-         }
-       )
-     }
- });
-
-////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////
-
-//كود اقل من شهر يتبند
-const moment = require("moment")
-client.on("guildMemberAdd", m => {
-    if (datediff(parseDate(moment(m.user.createdTimestamp).format('l')), parseDate(moment().format('l'))) < 30) {
-        m.ban();
-    };
-    function parseDate(str) {
-        var mdy = str.split('/');
-        return new Date(mdy[2], mdy[0]-1, mdy[1]);
-    };
-   
-    function datediff(first, second) {
-        return Math.round((second-first)/(1000*60*60*24));
-    };
-});
-
-////////////////////////////////////////////////////////////////////////////
-
-
-
-
+//كود التقديم
 client.on('message', async message => {
   var command = message.content.toLowerCase().split(" ")[0];
   var prefix = '#';
@@ -1512,7 +1484,7 @@ client.on('message', async message => {
       })
   }
 });
-
+////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1643,6 +1615,7 @@ client.on('guildCreate', guild => {
   .setDescription(`**شـكـراً لـك لإضـافـه الـبـوت الـى سـيـرفـرك**`)
       guild.owner.send(embed)
 });
+
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -1678,43 +1651,11 @@ client.on('message', message => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود بي انفايت
-client.on('guildMemberAdd', member => { //LAST CODES -HONRAR-
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const stewart = member.guild.channels.find("name", "3rb");
-     stewart.send(`<@${member.user.id}> تمت الدعوه من <@${inviter.id}>`);
-   //  stewart.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
-  });
-})
-
-////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////
-
 //كود البوت يكتب بدال عنك
 client.on('message', async msg => {
   client.snek = require('snekfetch');
 var p = "#"
-if(msg.content.startsWith(p + "أكتب")) {
-let args = msg.content.split(' ').slice(1).join(' ');
-if(!args) return args.missing(msg, 'لم يتم اضافة اي كلام', this.help);
-msg.channel.startTyping();
-const searchMessage = await msg.channel.send('Painting...');
-const { body } = await client.snek.get(`https://nekobot.xyz/api/imagegen?type=clyde&text=${encodeURIComponent(args)}`);
-msg.channel.send({file: { attachment:body.message, name: 'clyde.png'}}).then(()=> { searchMessage.delete(); msg.channel.stopTyping(); });
-};
-});
-
-//كود البوت يكتب بدال عنك
-client.on('message', async msg => {
-  client.snek = require('snekfetch');
-var p = "#"
-if(msg.content.startsWith(p + "k")) {
+if(msg.content.startsWith(p + "iktb")) {
 let args = msg.content.split(' ').slice(1).join(' ');
 if(!args) return args.missing(msg, 'لم يتم اضافة اي كلام', this.help);
 msg.channel.startTyping();
