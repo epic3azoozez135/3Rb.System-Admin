@@ -120,17 +120,6 @@ client.on('message', message => {
 }
 });
 
-//كود فك الباند عن الكل
-client.on('message', message => {
-  if(msg.content.startsWith (prefix  + '#uban-all')) {
-if(!message.channel.guild) return;
-message.guild.members.forEach( member => {
-   
-   member.unban()
-})
-}
-});
-
 //كود اي احد ينشر يتبند
 client.on('message', message => {
   if (message.content.includes('discord.gg')){
