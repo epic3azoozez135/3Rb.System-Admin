@@ -190,12 +190,12 @@ client.on("message", message => {
     let command = message.content.split(" ")[0];
     
     if (command === "#mute") {
-          if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **").catch(console.error);
+          if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يـوجـد لـديـك بـرمـشـن 'Manage Roles' **").catch(console.error);
     let user = message.mentions.users.first();
     let modlog = client.channels.find('name', 'log');
     let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
     if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").catch(console.error);
-    if (message.mentions.users.size < 1) return message.reply('** يجب عليك منشنت شخص اولاً**').catch(console.error);
+    if (message.mentions.users.size < 1) return message.reply('**يـجـب عـلـيـك مـنـشـنـت شـخـص اولاً**').catch(console.error);
     
     const embed = new Discord.RichEmbed()
       .setColor(0x00AE86)
@@ -205,13 +205,13 @@ client.on("message", message => {
       .addField('تم ميوت:', `${user.username}#${user.discriminator} (${user.id})`)
       .addField('بواسطة:', `${message.author.username}#${message.author.discriminator}`)
      
-     if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** لا يوجد لدي برمشن Manage Roles **').catch(console.error);
+     if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** لا يـوجـد لـدي بـرمـشـن Manage Roles **').catch(console.error);
    
     if (message.guild.member(user).roles.has(muteRole.id)) {
-  return message.reply("**:white_check_mark: .. تم اعطاء العضو ميوت**").catch(console.error);
+  return message.reply("**:white_check_mark: .. تـم اعـطـاء الـعـضـو مـيـوت**").catch(console.error);
   } else {
       message.guild.member(user).addRole(muteRole).then(() => {
-  return message.reply("**:white_check_mark: .. تم اعطاء العضو ميوت كتابي**").catch(console.error);
+  return message.reply("**:white_check_mark: .. تـم اعـطـاء الـعـضـو مـيـوت كـتـابـي**").catch(console.error);
   });
     }
   
