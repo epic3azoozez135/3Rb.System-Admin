@@ -793,7 +793,7 @@ if (message.content.startsWith(prefix + "uptime")) { // الامر
  
     }
  
-    message.channel.send("" +${days} days, ${hours} hrs, ${minutes} , ${seconds} sec+ "");
+    message.channel.send("" + ${days} days, ${hours} hrs, ${minutes} , ${seconds} sec+ "");
  
 }
 });
