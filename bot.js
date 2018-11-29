@@ -265,7 +265,6 @@ msg.delete();
 //كود لانشاء روم صوتي
   client.on('message', message => {
     if (message.content.startsWith(prefix+"voice Room")) {
-         if (message.content.startsWith(prefix+"روم صوتي")) {
         var args = message.content.split(" ").slice(1);
         var argrst = args.join(' ');
                     message.guild.createChannel(`${argrst}`,'voice')
