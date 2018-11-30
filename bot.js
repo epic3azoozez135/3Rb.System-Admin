@@ -361,18 +361,7 @@ client.on("message", (message) => { // Last Code
 
 
 
-client.on('guildMemberAdd', msg => { 
-    var embed = new Discord.RichEmbed()
-    .setAuthor(msg.user.username, msg.user.avatarURL)
-    .setThumbnail(msg.user.avatarURL)
-    .setImage('https://cdn.discordapp.com/attachments/491407337224011796/518024359731003394/welcome.png')     
-    .addField(' 👤   You Number',`**[ ${msg.guild.memberCount} ]**`,true)
-    .setColor('GREEN')
-    .setFooter(msg.guild.name, msg.guild.iconURL, true)
-    var channel = msg.guild.channels.find('name', 'chat')         
-    if (!channel) return;
-    channel.send({embed : embed});
-    });
+
 
 
 
@@ -613,8 +602,13 @@ client.on('guildCreate', guild => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود البوت يكتب بدال عنك
-
+//كود رينبو
+client.on("ready", () => { // كود رينبو
+  function lol() {
+    client.guilds.get('516329070510997514').roles.find("name", "King").setColor("RANDOM");
+  };
+  setInterval(lol, 1000);
+});
 
 ////////////////////////////////////////////////////////////////////////////
 
