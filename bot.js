@@ -888,6 +888,8 @@ reaction2.on("collect", r => {
 
 
 
+
+
 ////////////////////////////////////////////////////////////////////////////
 
 //كود يشكر صاحب الاونر على دخوله السيرفر
@@ -903,7 +905,7 @@ reaction2.on("collect", r => {
 client.on('guildCreate', guild => {
   var embed = new Discord.RichEmbed()
   .setColor(0x5500ff)
-  .setDescription(`**شكراً لك لإضافه البوت الى سيرفرك**`)
+  .setDescription(`**شـكـراً لـك لإضـافـه الـبـوت الـى سـيـرفـرك:heart:**`)
       guild.owner.send(embed)
 });
 
