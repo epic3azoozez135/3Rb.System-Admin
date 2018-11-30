@@ -113,7 +113,7 @@ client.on('message', message => {
   if (message.content.includes('discord.gg')){
                       if(!message.channel.guild) return message.reply ('')
                   if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
-     message.channel.send('ban <@' + message.author.id + '>')
+     message.channel.send('تـم حـظـر بـسـبـب الـنـشـر  <@' + message.author.id + '>')
      message.delete()
      }
   }
@@ -124,7 +124,7 @@ client.on('message', message => {
                message.channel.sendMessage("", {embed: {
                author: {
                },
-               title: 'بسبب النشر ' + member.displayName + ' تم حظر',
+               title: 'بـسـبـب الـنـشـر ' + member.displayName + ' تـم حـظـر',
                color: 490101,
                }
              });
