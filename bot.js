@@ -378,7 +378,7 @@ client.on("message", (message) => { // Last Code
 //كود اعطاء رتب الاعضاء
 client.on ("guildMemberAdd", member => {
   
-  var role = member.guild.roles.find ("name", "3Rb");
+  var role = member.guild.roles.find ("name", "Sw");
   member.addRole (role);
  
 })
