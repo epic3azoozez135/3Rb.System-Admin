@@ -327,46 +327,19 @@ client.on("message", (message) => { // Last Code
 ////////////////////////////////////////////////////////////////////////////
 
 //كود انشاء روم كتابي مع ريأكشن
-		client.on('message', msg => {
-  if(!msg.guild) return;
-    if (msg.content.startsWith(prefix +'#text-channel')) {
-     let args = msg.content.split(" ").slice(1);
-    if(!msg.channel.guild) return msg.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-let ra3d = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setThumbnail(msg.author.avatarURL)
-.setDescription(`هل انت متاكد من انشاء روم كتابي؟\n  ✅  \n  ❌ \n  لديك 60 ثانية للاختيار`)                                                                                                                                                                       
-msg.channel.send(ra3d).then(message => {
- message.react('✅').then(r=>{
- message.react('❌').then(r=>{           
- let eyadandr3d = (reaction, user) => reaction.emoji.name === '✅' && user.id === msg.author.id;
- let eyadandr3dd = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
- let tt  = message.createReactionCollector(eyadandr3d, { time: 60000 });
- let er  = message.createReactionCollector(eyadandr3dd, { time: 60000 });
-er.on("collect", r => {
-msg.channel.send("`تم الالغاء`")
-message.delete();
-})
-tt.on("collect", r => {
-msg.guild.createChannel(args.join(' '), 'text').then(ra3deyad => {
-channelCreated = ra3deyad.createdAt
-      const embed = new Discord.RichEmbed()
-  .setColor('RANDOM')
-  .setImage()
-  .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKeHPs6TdfglIxEI9LYVtHSF_8WBLeR2jP5ReFxlo0z7KKOKrL')
-  .setURL('')
-  .addField(`اسم القناة`, `${ra3deyad.name}`, true)
-  .addField(`أيدي القناة`, `${ra3deyad.id}`, true)
-  .addField(`نوع القناة`, `${ra3deyad.type}`, true)
-  .addField(`متى انشأت القناة`, `${channelCreated}`)
- msg.channel.send({embed})
-    message.delete();
-})
-})
-})
-})
-})
-}
+client.on('message', function(message) {
+    if(message.content.startsWith(prefix + 'roll')) { // Last Codes - Ayman
+        let args = message.content.split(" ").slice(1);
+        if (!args[0]) {
+            message.channel.send('**Put a number**'); // Last Codes - Ayman
+            return;
+            }
+    message.channel.send(Math.floor(Math.random() * args.join(' ')));
+            if (!args[0]) {
+          message.edit('1')
+          return;
+        }
+    }
 });
 
 ////////////////////////////////////////////////////////////////////////////
@@ -630,14 +603,14 @@ client.on('message', message => {
 
 //القيف اوي
 client.on('message',async message => {
-  const moment = require('moment');
+    const moment = require('moment');
 const ms = require('ms')
-  var prefix = '#' //بريفكس البوت
-var time = moment().format('Do MMMM YYYY , hh:mm');
-var room;
-var title;
-var duration;
-var currentTime = new Date(),
+    var prefix = '#' //بريفكس البوت
+  var time = moment().format('Do MMMM YYYY , hh:mm');
+  var room;
+  var title;
+  var duration;
+  var currentTime = new Date(),
 hours = currentTime.getHours() + 3 ,
 minutes = currentTime.getMinutes(),
 done = currentTime.getMinutes() + duration,
@@ -653,70 +626,70 @@ hours = hours - 12;
 if (hours == 0) {
 hours = 12;
 }
-
-var filter = m => m.author.id === message.author.id;
-if(message.content.startsWith(prefix + "gstart")) { // الامر
-
-  if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
-  message.channel.send(`:eight_pointed_black_star:| **ارسل اسم الروم**`).then(msg => {
-    message.channel.awaitMessages(filter, {
-      max: 1,
-      time: 20000,
-      errors: ['time']
-    }).then(collected => {
-      let room = message.guild.channels.find('name' , collected.first().content);
-      if(!room) return message.channel.send(':heavy_multiplication_x:| **لم استطيع ايجاد الروم :(**');
-      room = collected.first().content;
-      collected.first().delete();
-      msg.edit(':eight_pointed_black_star:| **الوقت للقيف اواي**').then(msg => {
-        message.channel.awaitMessages(filter, {
-          max: 1,
-          time: 20000,
-          errors: ['time']
-        }).then(collected => {
-          if(!collected.first().content.match(/[1-60][s,m,h,d,w]/g)) return message.channel.send('**البوت لا يدعم هذا الوقت**');
-          duration = collected.first().content
-          collected.first().delete();
-          msg.edit(':eight_pointed_black_star:| **يتم الارسال الى الروم الان **').then(msg => {
-            message.channel.awaitMessages(filter, {
-              max: 1,
-              time: 20000,
-              errors: ['time']
-            }).then(collected => {
-              title = collected.first().content;
-              collected.first().delete();
-              msg.delete();
-              message.delete();
-              try {
-                let giveEmbed = new Discord.RichEmbed()
-                .setDescription(`**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration} \n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`)
-                .setFooter(message.author.username, message.author.avatarURL);
-                message.guild.channels.find("name" , room).send(' :heavy_check_mark: **Last Code** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
-                   let re = m.react('🎉');
-                   setTimeout(() => {
-                     let users = m.reactions.get("🎉").users
-                     let list = users.array().filter(u => u.id !== m.author.id !== client.user.id);
-                     let gFilter = list[Math.floor(Math.random() * list.length) + 0]
-                     let endEmbed = new Discord.RichEmbed()
-                     .setAuthor(message.author.username, message.author.avatarURL)
-                     .setTitle(title)
-                     .addField('Giveaway Ended !🎉',`Winners : ${gFilter} \nEnded at :`)
-                     .setTimestamp()
-                   m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
-                  message.guild.channels.find("name" , room).send(`**Congratulations ${gFilter}! You won The \`${title}\`**` , {embed: {}})
-              }, ms(duration));
-          });
-              } catch(e) {
-              message.channel.send(`:heavy_multiplication_x:| **ليس لدي برمشن المطلوب**`);
-                console.log(e);
-              }
+ 
+  var filter = m => m.author.id === message.author.id;
+  if(message.content.startsWith(prefix + "gstart")) {
+ 
+    if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
+    message.channel.send(`:eight_pointed_black_star:| **Send Name channel For the Giveaway**`).then(msg => {
+      message.channel.awaitMessages(filter, {
+        max: 1,
+        time: 20000,
+        errors: ['time']
+      }).then(collected => {
+        let room = message.guild.channels.find('name' , collected.first().content);
+        if(!room) return message.channel.send(':heavy_multiplication_x:| **i Found It :(**');
+        room = collected.first().content;
+        collected.first().delete();
+        msg.edit(':eight_pointed_black_star:| **Time For The Giveaway**').then(msg => {
+          message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+          }).then(collected => {
+            if(!collected.first().content.match(/[1-60][s,m,h,d,w]/g)) return message.channel.send('**The Bot Not Support This Time**');
+            duration = collected.first().content
+            collected.first().delete();
+            msg.edit(':eight_pointed_black_star:| **Now send The Present **').then(msg => {
+              message.channel.awaitMessages(filter, {
+                max: 1,
+                time: 20000,
+                errors: ['time']
+              }).then(collected => {
+                title = collected.first().content;
+                collected.first().delete();
+                msg.delete();
+                message.delete();
+                try {
+                  let giveEmbed = new Discord.RichEmbed()
+                  .setDescription(`**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration} \n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`)
+                  .setFooter(message.author.username, message.author.avatarURL);
+                  message.guild.channels.find("name" , room).send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
+                     let re = m.react('🎉');
+                     setTimeout(() => {
+                       let users = m.reactions.get("🎉").users
+                       let list = users.array().filter(u => u.id !== m.author.id !== client.user.id);
+                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
+                       let endEmbed = new Discord.RichEmbed()
+                       .setAuthor(message.author.username, message.author.avatarURL)
+                       .setTitle(title)
+                       .addField('Giveaway Ended !🎉',`Winners : ${gFilter} \nEnded at :`)
+                       .setTimestamp()
+                     m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
+                    message.guild.channels.find("name" , room).send(`**Congratulations ${gFilter}! You won The \`${title}\`**` , {embed: {}})
+                }, ms(duration));
+            });
+                } catch(e) {
+                message.channel.send(`:heavy_multiplication_x:| **i Don't Have Prem**`);
+                  console.log(e);
+                }
+              });
             });
           });
         });
       });
     });
-  });
-}
+  }
 });
 
 ////////////////////////////////////////////////////////////////////////////
