@@ -327,20 +327,7 @@ client.on("message", (message) => { // Last Code
 ////////////////////////////////////////////////////////////////////////////
 
 //كود انشاء روم كتابي مع ريأكشن
-client.on('message', function(message) {
-    if(message.content.startsWith(prefix + 'roll')) { // Last Codes - Ayman
-        let args = message.content.split(" ").slice(1);
-        if (!args[0]) {
-            message.channel.send('**Put a number**'); // Last Codes - Ayman
-            return;
-            }
-    message.channel.send(Math.floor(Math.random() * args.join(' ')));
-            if (!args[0]) {
-          message.edit('1')
-          return;
-        }
-    }
-});
+
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -398,15 +385,18 @@ client.on ("guildMemberAdd", member => {
 //كود يدخل البوت الروم الصوتي
 client.on('message', msg => {
 
-  if (msg.content == '#join') {
-      if (msg.member.voiceChannel) {
+    if (msg.content == '#join') {
+        if (msg.member.voiceChannel) {
 
-   if (msg.member.voiceChannel.joinable) {
-       msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
-   }
-  }
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
+     }
+    }
 }
-});
+})
+client.on('ready', () => {
+    client.channels.get("518001222209241098").join();
+    });
 
 ////////////////////////////////////////////////////////////////////////////
 
