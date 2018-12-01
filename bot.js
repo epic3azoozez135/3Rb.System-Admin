@@ -254,6 +254,43 @@ client.on("message", message => {
 
 
 ////////////////////////////////////////////////////////////////////////////
+client.on('message',message => {
+if(!message.channel.guild) return;
+    var prefix1 = "#";
+if (!message.content.startsWith(prefix1)) return;
+    var command = message.content.split(" ")[0];
+     command = command.slice(prefix1.length);
+    if (command == "move") {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("**:x: Invalid User **")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannelname = message.member.voiceChannel.name;
+ var authorchannel = message.member.voiceChannelID;
+ var userid = message.mentions.members.first().id;
+ 
+ message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
+     
+} else {
+message.channel.send("**:x:  User must be in voice channel **")
+}
+} else {
+ message.channel.send("**:x:  You must be in voice channel!**")
+}
+} else {
+message.react("❌")
+ }}})
+////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
 
 //كود مسح الشات ( الكلير ) نفس سبيد بوت
 client.on('message', message => {
@@ -359,45 +396,7 @@ client.on("message", (message) => { // Last Code
 
 
 
-client.on("ready", () => {
-    var guild;
-    while (!guild)
-        guild = client.guilds.get("518077303260184597");
-    guild.fetchInvites().then((data) => {
-        data.forEach((Invite, key, map) => {
-            var Inv = Invite.code;
-            dat[Inv] = Invite.uses;
-        });
-    });
-});
- 
- 
- 
-client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("518149669377802264");
-    if (!channel) {
-        console.log("!the channel id it's not correct");
-        return;
-    }
-    if (member.id == client.user.id) {
-        return;
-    }
-    console.log('-');
-    var guild;
-    while (!guild)
-        guild = client.guilds.get("518077303260184597");
-    guild.fetchInvites().then((data) => {
-        data.forEach((Invite, key, map) => {
-            var Inv = Invite.code;
-            if (dat[Inv])
-                if (dat[Inv] < Invite.uses) {
- channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;        
- }
-            dat[Inv] = Invite.uses;
-       
-       });
-    });
-});
+
 
 
 
@@ -623,6 +622,25 @@ if(message.content.startsWith(prefix + 'nic')) {
 }});
 
 ////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
