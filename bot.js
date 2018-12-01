@@ -125,30 +125,6 @@ client.on('message', message => {
 }
 });
 
-//كود اي احد ينشر يتبند
-client.on('message', message => {
-  if (message.content.includes('discord.gg')){
-                      if(!message.channel.guild) return message.reply ('')
-                  if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
-     message.channel.send('تـم حـظـر بـسـبـب الـنـشـر  <@' + message.author.id + '>')
-     message.delete()
-     }
-  }
-        if (message.content.startsWith("ban")) {
-           if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
-           var member= message.mentions.members.first();
-           member.ban().then((member) => {
-               message.channel.sendMessage("", {embed: {
-               author: {
-               },
-               title: 'بـسـبـب الـنـشـر ' + member.displayName + ' تـم حـظـر',
-               color: 490101,
-               }
-             });
-         }
-       )
-     }
- });
 
 //كود يبند الوهمي الاقل من اسبوع
 const moment = require("moment")
@@ -211,6 +187,40 @@ client.on('message', message => {
   })
 }
 });
+
+//كود كيك روم
+client.on("message", message => {
+    var prefix = "#";
+    const command = message.content.split(" ")[0];
+ 
+    if(command == prefix+"vkick"){
+ 
+        if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
+            return message.reply('you do not have permission to perform this action!');
+        }
+ 
+        var member = message.guild.members.get(message.mentions.users.array()[0].id);
+        if(!message.mentions.users){
+            message.reply("please mention the member")
+            return;
+        }
+ 
+    if(!member.voiceChannel){
+    message.reply("i can't include voice channel for member!")
+    return;
+    }
+              message.guild.createChannel('voicekick', 'voice').then(c => {
+                member.setVoiceChannel(c).then(() => {
+                    c.delete(305).catch(console.log)
+       
+ 
+ 
+   
+      });
+     });
+    }
+});
+
   
 ////////////////////////////////////////////////////////////////////////////
 
@@ -253,39 +263,38 @@ client.on("message", message => {
   
   });
 
+//كود الي ينشر ياكل ميوت
+client.on('message', function(message) {
+    if (!message.member.hasPermissions(['ADMINISTRATOR'])){
+            let command = message.content.split(" ")[0];
+        if(message.content.includes('discord.gg')){
+        message.reply (' ')
+           if(!message.channel.guild) return message.reply('** This command only for servers**');
+     message.member.addRole(message.guild.roles.find('name', 'Muted'));
+    const embed500 = new Discord.RichEmbed()
+      .setTitle(":x: | تمت معاقبتك")
+            .addField(`**تـم اعـطـاء الـشـخـص مـيـوت صـوتـي وا كـتـابـي**`)
+      .addField(`by`,`ALPHACODES`)
+            .setColor("c91616")
+            .setThumbnail(`${message.author.avatarURL}`)
+            .setAuthor(message.author.username, message.author.avatarURL)
+        .setFooter(`${message.guild.name} Server`)
+     message.channel.send(embed500)
+   
+       
+    }
+    }
+})
+
 ////////////////////////////////////////////////////////////////////////////
 
 
 
 ////////////////////////////////////////////////////////////////////////////
-client.on('message',message => {
-if(!message.channel.guild) return;
-    var prefix1 = "#";
-if (!message.content.startsWith(prefix1)) return;
-    var command = message.content.split(" ")[0];
-     command = command.slice(prefix1.length);
-    if (command == "move") {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("**:x: Invalid User **")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannelname = message.member.voiceChannel.name;
- var authorchannel = message.member.voiceChannelID;
- var userid = message.mentions.members.first().id;
- 
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
-     
-} else {
-message.channel.send("**:x:  User must be in voice channel **")
-}
-} else {
- message.channel.send("**:x:  You must be in voice channel!**")
-}
-} else {
-message.react("❌")
- }}})
+
+//كود سحب
+
+
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -908,8 +917,57 @@ client.on("guildMemberAdd", member => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//يقول كم البوت شغال
+//كريديت البوت
+const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
+const coolDown = new Set();
 
+client.on('message',async message => {
+    
+if(message.author.bot) return;
+if(!credits[message.author.id]) credits[message.author.id] = {
+    credits: 50
+};
+
+let userData = credits[message.author.id];
+let m = userData.credits;
+
+fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
+    if (err) console.error(err);
+  });
+  credits[message.author.id] = {
+      credits: m + 0.5,
+  }
+  
+    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
+message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
+}
+});
+
+client.on('message', async message => {
+    let amount = 250;
+    if(message.content.startsWith(prefix + "daily")) {
+    if(message.author.bot) return;
+    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
+    
+    let userData = credits[message.author.id];
+    let m = userData.credits + amount;
+    credits[message.author.id] = {
+    credits: m
+    };
+
+    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
+    if (err) console.error(err);
+    });
+    
+    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
+        coolDown.add(message.author.id);
+    });
+    
+    setTimeout(() => {
+       coolDown.remove(message.author.id);
+    },86400000);
+    }
+});
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -917,8 +975,60 @@ client.on("guildMemberAdd", member => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//
-
+//كود منع نشر الروابط بكل انواعها 
+    client.on('message', message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes('gmail')){
+        message.delete()
+    return message.reply(`**لايمكنك نشر الجيمل  هنا**`)
+    }
+});
+ 
+client.on('message', message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes('snapchat')){
+        message.delete()
+    return message.reply(`**لايمكنك نشر سناب شات  هنا**`)
+    }
+});
+ 
+ 
+client.on('message', message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes('instagram')){
+        message.delete()
+    return message.reply(`**لايمكنك نشر الانستقرام هنا**`)
+    }
+});
+ 
+ 
+client.on('message', message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes('twitter')){
+        message.delete()
+    return message.reply(`**لايمكنك  نشر التويتر هنا**`)
+    }
+});
+ 
+ 
+client.on('message', message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes('facebook')){
+        message.delete()
+    return message.reply(`**لايمكنك نشر الفيس بوك هنا**`)
+    }
+});
+ 
+ 
+ 
+client.on('message', message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes('youtube')){
+        message.delete()
+    return message.reply(`**لايمكنك نشر اروابط في هذا اسرفر**`)
+    }
+ 
+});
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -940,8 +1050,29 @@ client.on('guildCreate', guild => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود يسوي الوان
-
+//كود يرسلك البوت رابطه عشين يدخل سيرفرك
+client.on('message', message => {
+  if (true) {
+if (message.content === '#invite') {
+      message.author.send('  رابط بوتك  |  تفضل ربط البوت     ').catch(e => console.log(e.stack));
+ 
+    }
+   }
+  });
+ 
+ 
+client.on('message', message => {
+     if (message.content === "!invite") {
+     let embed = new Discord.RichEmbed()
+  .setAuthor(message.author.username)
+  .setColor("#9B59B6")
+  .addField(" Done | تــــم" , " |  تــــم ارســالك في الخــاص")
+     
+     
+     
+  message.channel.sendEmbed(embed);
+    }
+});
 
 ////////////////////////////////////////////////////////////////////////////
 
