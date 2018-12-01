@@ -67,6 +67,19 @@ client.login(process.env.BOT_TOKEN);
 
 ////////////////////////////////////////////////////////////////////////////
 
+//كود تبنيد بوتات النشر
+client.on('message', message => {
+    if(message.channel.type === 'dm') {
+        var guildID = '518077303260184597'; // <=============== ايدي السيرفر حقك
+        if(message.content.includes('discord.gg/')) {
+            var member = client.guilds.find(g => g.id === guildID).members.find(m => m.id === message.author.id);
+            member.ban({ reason: 'ADS In Private.' }).catch();
+        }
+    }
+});
+
+
+
 //كود الباند
 client.on('message', message => {
   var prefix = "#";
