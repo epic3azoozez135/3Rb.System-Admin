@@ -386,21 +386,6 @@ client.on("message", (message) => { // Last Code
 
 
 
-client.on('message', message => {
-  var prefix ="#"; // البريفكس
-if (message.content.startsWith(prefix + 'perms')) { // الامر
-         if(!message.channel.guild) return;
-         var perms = JSON.stringify(message.channel.permissionsFor(message.author).serialize(), null, 4);
-         var zPeRms = new Discord.RichEmbed()
-         .setColor('RANDOM')
-         .setTitle(':tools: البرمشنات')
-         .addField('البرمشنات التي لديك',perms)
-                  message.channel.send({embed:zPeRms});
- 
-    }
-});
-
-
 
 
 
@@ -502,7 +487,20 @@ client.on('message', message => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود معلومات السيرفر
+//كود يطلع البريمشنات
+client.on('message', message => {
+  var prefix ="#"; // البريفكس
+if (message.content.startsWith(prefix + 'perms')) { // الامر
+         if(!message.channel.guild) return;
+         var perms = JSON.stringify(message.channel.permissionsFor(message.author).serialize(), null, 4);
+         var zPeRms = new Discord.RichEmbed()
+         .setColor('RANDOM')
+         .setTitle(':tools: البرمشنات')
+         .addField('البرمشنات التي لديك',perms)
+                  message.channel.send({embed:zPeRms});
+ 
+    }
+});
 
 
 ////////////////////////////////////////////////////////////////////////////
