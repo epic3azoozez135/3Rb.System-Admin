@@ -879,12 +879,12 @@ client.on('message', message => {
          c.send({ embed: embed });
      }).catch(console.error);
  }
- if (message.content.toLowerCase().startsWith(prefix + `close`)) {
+ if (message.content.toLowerCase().startsWith(prefix + `حذف-التذكرة`)) {
      if (!message.channel.name.startsWith(`ticket`)) return message.channel.send(`لا يمكنك استخدام أمر الإغلاق خارج قناة التذاكر`);
   
-     message.channel.send(`**confirm : هـل انـت مـتـأكـد مـن اغـلاق الـتـذكـرة ؟ اذا انـت مـتـأكـد اكـتـب**`)
+     message.channel.send(`**حذف : هـل انـت مـتـأكـد مـن اغـلاق الـتـذكـرة ؟ اذا انـت مـتـأكـد اكـتـب**`)
      .then((m) => {
-       message.channel.awaitMessages(response => response.content === 'confirm', {
+       message.channel.awaitMessages(response => response.content === 'حذف', {
          max: 1,
          time: 10000,
          errors: ['time'],
