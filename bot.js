@@ -801,7 +801,6 @@ client.on('message', message => {
     var bc = new
        Discord.RichEmbed()
        .setColor('RANDOM')
-       .setTitle('السيرفر')
        .addField('**السيرفر**', message.guild.name)
        .addField('**المرسل**', message.author.username)
        .addField('**الرساله**', args)
