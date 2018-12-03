@@ -1215,10 +1215,11 @@ client.on('message', message => {
 
 
 
+//برد كاس امبد
 client.on('message', message => {
               if(!message.channel.guild) return;
     var prefix = "#";
-    if(message.content.startsWith(prefix + 'oobc')) {
+    if(message.content.startsWith(prefix + 'mbc')) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -1237,7 +1238,10 @@ client.on('message', message => {
     reaction1.on("collect", r => {
     message.channel.send(`☑ | تـم أرسال الـبـردكـاس لـي ${message.guild.members.size} عـضـو`).then(m => m.delete(5000));
     message.guild.members.forEach(m => {
+    })
+    })
+    }
+    });
+     
 
      
-     
-
