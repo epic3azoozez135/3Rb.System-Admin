@@ -796,12 +796,12 @@ client.on('message', message => {
     let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
     let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
     reaction1.on("collect", r => {
-    message.channel.send(`☑ | Done ... The Broadcast Message Has Been Sent For ${message.guild.members.size} Members`).then(m => m.delete(5000));
+    message.channel.send(`☑ | تـم أرسال الـبـردكـاس لـي ${message.guild.members.size} عـضـو`).then(m => m.delete(5000));
     message.guild.members.forEach(m => {
     var bc = new
        Discord.RichEmbed()
        .setColor('RANDOM')
-       .setTitle('Broadcast')
+       .setTitle('السيرفر')
        .addField('**السيرفر**', message.guild.name)
        .addField('**المرسل**', message.author.username)
        .addField('**الرساله**', args)
