@@ -961,8 +961,14 @@ client.on('guildCreate', guild => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود يسويلك الرتب
-
+//كود يرحب بل خاص
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
+:crown:اسم العضو  ${member}:crown:  
+انت العضو رقم ${member.guild.memberCount} `) 
+}).catch(console.error)
+})
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -1165,10 +1171,27 @@ client.on('message', message => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-//كود التقديم على السبورت
+//قسم اكواد الهيلب
 
 
 ////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+client.on('message', message => {
+            if (message.content.startsWith(prefix + "#help")) {
+     let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField('     **#help-General** ' ,' **يطلع لك كل الأوامر العامة** ')
+.addField('     **#help-Games**  ' ,' **يطلع لك كل الأوامر الالعاب** ')
+.addField('     **#help-admin** ' , '**يطلع لك كل اومر الأداره**') 
+.addField('     **#help-Bots** ' , '**يطلع لك كل اوامر البوت**') 
+.setColor('#7d2dbe')
+  message.channel.sendEmbed(embed);
+    }
+});
 
 
 
