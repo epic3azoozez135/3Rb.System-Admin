@@ -656,8 +656,6 @@ client.on("guildMemberAdd", member => {
 
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////
 
 //كود اعطاء رتب الاعضاء
@@ -923,7 +921,7 @@ if(message.content.startsWith(prefix + 'nic')) {
 ////////////////////////////////////////////////////////////////////////////
 
 
-//كريديت البوت
+//كود الفويس اون لين
       client.on('message', async message => {
   if(message.content.startsWith(prefix + "voicesetup")) {
   if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply(':x: **ليس لديك الصلاحيات الكافية**');
@@ -956,7 +954,7 @@ if(message.content.startsWith(prefix + 'nic')) {
 //
 client.on('message', message => {
   if (true) {
-if (message.content === '.invite') {
+if (message.content === '#invite') {
       message.author.send('  رابط بوتك  |  تفضل ربط البوت     ').catch(e => console.log(e.stack));
  
     }
@@ -965,7 +963,7 @@ if (message.content === '.invite') {
  
  
 client.on('message', message => {
-     if (message.content === ".invite") {
+     if (message.content === "#invite") {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#9B59B6")
@@ -1085,8 +1083,17 @@ client.on('message' , message => {
 
 
 
+////////////////////////////////////////////////////////////////////////////
 
+//كود الرينبو
+client.on("ready", () => { // كود رينبو
+  function lol() {
+    client.guilds.get('ايدي السيرفر').roles.find("name", "اسم رتبة").setColor("RANDOM");
+  };
+  setInterval(lol, 1000);
+});
 
+////////////////////////////////////////////////////////////////////////////
 
 
 
