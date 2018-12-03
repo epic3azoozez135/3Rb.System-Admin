@@ -83,7 +83,6 @@ client.on('message', message => {
 });
 
 
-
 //كود الباند
 client.on('message', message => {
   var prefix = "#";
@@ -404,11 +403,10 @@ client.on('guildMemberAdd', member => {
     const ei = invites[member.guild.id];
     const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     const inviter = client.users.get(invite.inviter.id);
-    const stewart = member.guild.channels.find("name", "3rb");
-     stewart.send(`<@${member.user.id}> invite.By <@${inviter.id}>`);
-   //  stewart.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
+    const stewart = member.guild.channels.find("name", "أسم الشات");
+     stewart.send(`<@${member.user.id}> Join.By <@${inviter.id}>`);
   });
-})
+
 
 
 
@@ -870,8 +868,42 @@ if(message.content.startsWith(prefix + 'nic')) {
 ////////////////////////////////////////////////////////////////////////////
 
 
+ 
+////////////////////////////////////////////////////////////////////////////
 
-
+ //كود رابط
+ client.on('message', message => {
+    if (message.content.startsWith("رابط")) {
+ 
+  message.channel.createInvite({
+        thing: true,
+        maxUses: 10,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("RANDOM")
+                .setAuthor(message.guild.name, message.guild.iconURL)
+        .setDescription(`
+**
+---------------------
+-[${message.guild.name}]  هذا هو رابط سيرفر
+---------------------
+-هذا الرابط صالح ل 10 مستخدم فقط
+---------------------
+-هذا الرابط صالح لمده 24 ساعه فقط
+---------------------
+**`)
+      message.author.sendEmbed(Embed11)
+    }
+});
+ 
+////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -996,62 +1028,7 @@ client.on('guildCreate', guild => {
 ////////////////////////////////////////////////////////////////////////////
 
 //كود يسويلك الرتب
-client.on('message', message => {
-    if (message.content === "_createroles") {
-    if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
-            if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`**${message.author.username} You Dont Have** ``MANAGE_ROLES`` **Premission**`);
 
-                     message.guild.createRole({ name: "- Owner.Bots.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Owner.Big.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "-  .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟الرئسى🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- OwnerShip.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- President.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- HighNiss.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Kings.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟الاداره🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "-  .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Actve.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "-  .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "-  .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "-  .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "-  .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Admins", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Support Team", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟المنظمين🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Devloper", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Events", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Avatar", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟المهمين🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- 3Rb.Group.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- 3Rb.Important.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Grande.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Ruler.'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟رتب.عيدي🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "link", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "plc", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "here", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "nick", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟...رتب.الخ🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "3Rb.", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- .'", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "▃▃🙟رتب.البوتات🙝▃▃", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Empire", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Music", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Music.Games", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Games", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "- Sw.Bots", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "System.", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Broadcast.", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Games.", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Music.", color: "#a31b1b", permissions: [] })
-                     message.guild.createRole({ name: "Music.", color: "#6c3491", permissions: [] })
-                     message.guild.createRole({ name: "Music.", color: "#1a7c3c", permissions: [] })
-        
-
-message.channel.sendMessage('**الرجاء الانتظار ريث ما يتم صناعه الرتب **')
-}
-});
 
 ////////////////////////////////////////////////////////////////////////////
 
