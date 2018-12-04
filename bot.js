@@ -1117,7 +1117,7 @@ client.on("message", message => {
         if(!message.channel.guild) return;
                 if(message.author.bot) return;
         let channel = message.guild.channels.find("name", "التقديمات")
-            if(!channel) return message.reply("**لانشاء روم التقديمات !!setsubmissions من فضلك اكتب الامر**")
+            if(!channel) return message.reply("**لانشاء روم التقديمات #روم1, وا #روم2 من فضلك اكتب الامر**")
             if(channel) {
             message.channel.send( message.member + ', **:timer:**').then( (m) =>{
               m.edit( message.member + ', **اسمك الحقيقى بالكامل ✍**' )
@@ -1218,7 +1218,7 @@ client.on("message", message => {
     if(mention.roles.has(mySupport)) return message.reply('هذا الشخص معه الرتبة مسبقا');
  
     mention.addRole(mySupport).then(() => {
-      acRoom.send(`**[ ${mySupport} ] واعطائك رتبة ${mention} تم بنجاح قبولك**`);
+      acRoom.send(`**{ ${mySupport} } وا اعـطـائـك رتـبـة { ${mention} }تـم قـبـولـك بـنـجاح:heart:**`);
     });
   }
 }
@@ -1232,7 +1232,7 @@ client.on('message',async message => {
   if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return;
   if(!mention) return message.reply("منشن شخص");
  
-  acRoom.send(`**${mention} تم رفضك للاسف**`)
+  acRoom.send(`**{ ${mention} } لـم يـتـم قـبـولـك لـلاسـف**:broken_heart:**`)
   }
 });
           client.on('message', message=>{
