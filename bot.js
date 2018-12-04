@@ -128,7 +128,7 @@ client.on('message', message => {
 //كود يبند الوهمي الاقل من اسبوع
 const moment = require("moment")
 client.on("guildMemberAdd", m => {
-    if (datediff(parseDate(moment(m.user.createdTimestamp).format('l')), parseDate(moment().format('l'))) < 30) {
+    if (datediff(parseDate(moment(m.user.createdTimestamp).format('l')), parseDate(moment().format('l'))) < 1) {
         m.ban();
     };
     function parseDate(str) {
